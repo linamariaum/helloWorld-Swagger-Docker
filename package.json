@@ -1,0 +1,22 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "Ejemplo trabajo practico docker, microservicios [Ing web]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linamariaum/helloWorld-Swagger-Docker.git"
+  },
+  "author": "LinaUribe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linamariaum/helloWorld-Swagger-Docker/issues"
+  },
+  "homepage": "https://github.com/linamariaum/helloWorld-Swagger-Docker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

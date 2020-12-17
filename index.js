@@ -1,16 +1,23 @@
 //Load express module with `require` directive
 var express = require('express')
 var app = express()
+const mongoose = require('mongoose')
 
-//Define request response in root URL (/)
-app.get('/', function (req, res) {
- res.send('Hello World!')
-})
+const port = process.env.PORT || 8081;
 
-//Launch listening server on port 8081
-app.listen(8081, function () {
- console.log('app listening on port 8081!')
-})
+const db_link = "mongodb://mongo:27017/helloworlddb";
+
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+};
+
+mongoose.connect(db_link, options).then( function() {
+    console.log('MongoDB is connected');
+    })
+    .catch( function(err) {
+    console.log(err);
+});
 
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
@@ -26,10 +33,15 @@ const swaggerOptions = {
         servers: ["http://localhost:8081"]
     }
  },
-apis: ["index.js"]
+ apis: ["index.js"]
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+//Define request response in root URL (/)
+app.get('/', function (req, res) {
+    res.send('Hello World!')
+})
 
 /**
 * @swagger
@@ -63,4 +75,9 @@ app.get('/customers', function (req, res) {
  */
 app.put('/customers', function (req, res) {
  res.status(201).send('Successfully updated customer')
+})
+
+//Launch listening server on port 8081
+app.listen(port, function () {
+    console.log('app listening on port 8081!')
 })
